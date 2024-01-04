@@ -13,7 +13,7 @@ const PostForm = () => {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      await addDoc(collection(db, "post"), {
+      await addDoc(collection(db, "posts"), {
         content: content,
         createdAt: new Date()?.toLocaleDateString("ko", {
           hour: "2-digit",
