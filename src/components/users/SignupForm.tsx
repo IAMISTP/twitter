@@ -91,6 +91,16 @@ const SignupForm = () => {
           회원가입
         </button>
       </div>
+      <div className="form__block--lg">
+        <button type="submit" className="form__btn--google">
+          Google 회원가입
+        </button>
+      </div>
+      <div className="form__block--lg">
+        <button type="submit" className="form__btn--github">
+          Github 회원가입
+        </button>
+      </div>
     </form>
   );
 };
