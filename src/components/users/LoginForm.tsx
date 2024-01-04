@@ -104,7 +104,7 @@ const LoginForm = () => {
           name="google"
           onClick={onClickSocialLogin}
         >
-          Google 회원가입
+          Google 로그인
         </button>
       </div>
       <div className="form__block--lg">
@@ -114,7 +114,7 @@ const LoginForm = () => {
           name="github"
           onClick={onClickSocialLogin}
         >
-          Github 회원가입
+          Github 로그인
         </button>
       </div>
     </form>
