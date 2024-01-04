@@ -1,4 +1,5 @@
 import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
+import { app } from "firebaseApp";
 import React, { ChangeEvent, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -14,7 +15,7 @@ const SignupForm = () => {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     try {
-      const auth = getAuth();
+      const auth = getAuth(app);
       await createUserWithEmailAndPassword(auth, userData.email, userData.password);
       navigate("/");
       toast.success("성공적으로 회원가입이 되었습니다.");
@@ -81,11 +82,11 @@ const SignupForm = () => {
       )}
       <div className="form__block">
         계정이 있으신가요?
-        <Link to="/login" className="form__link">
+        <Link to="/users/login" className="form__link">
           로그인 하기
         </Link>
       </div>
-      <div className="form__block">
+      <div className="form__block--lg">
         <button type="submit" className="form__btn-submit" disabled={error?.length > 0}>
           회원가입
         </button>
