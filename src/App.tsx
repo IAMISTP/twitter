@@ -9,8 +9,9 @@ import Loader from "components/loader/Loader";
 
 function App() {
   const auth = getAuth(app);
+
   const [init, setInit] = useState<boolean>(false);
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(!!auth?.currentUser);
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(!!auth.currentUser);
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
@@ -25,7 +26,7 @@ function App() {
 
   return (
     <Layout>
-      <ToastContainer />
+      <ToastContainer theme="dark" autoClose={1000} hideProgressBar newestOnTop />
       {init ? <Router isAuthenticated={isAuthenticated} /> : <Loader />}
     </Layout>
   );
