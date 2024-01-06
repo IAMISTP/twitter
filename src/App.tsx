@@ -1,22 +1,34 @@
-import "./App.css";
-import { Navigate, Route, Routes } from "react-router-dom";
+import Router from "components/Router";
+import Layout from "components/Layout";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { app } from "firebaseApp";
+import { useEffect, useState } from "react";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
+import Loader from "components/loader/Loader";
 
 function App() {
+  const auth = getAuth(app);
+
+  const [init, setInit] = useState<boolean>(false);
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(!!auth.currentUser);
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setIsAuthenticated(true);
+      } else {
+        setIsAuthenticated(false);
+      }
+      setInit(true);
+    });
+  }, [auth]);
+
   return (
-    <Routes>
-      <Route path="/" element={<h1>Home Page</h1>} />
-      <Route path="/posts" element={<h1>Post List Page</h1>} />
-      <Route path="/posts/:id" element={<h1>Post Detail Page</h1>} />
-      <Route path="/posts/new" element={<h1>Post New Page</h1>} />
-      <Route path="/posts/edit/:id" element={<h1>Post Edit Page</h1>} />
-      <Route path="/profile" element={<h1>Profile Page</h1>} />
-      <Route path="/profile/edit" element={<h1>Profile edit Page</h1>} />
-      <Route path="/notifications" element={<h1>Notifications Page</h1>} />
-      <Route path="/search" element={<h1>Search Page</h1>} />
-      <Route path="/users/login" element={<h1>Login Page</h1>} />
-      <Route path="/users/signup" element={<h1>Signup Page</h1>} />
-      <Route path="*" element={<Navigate replace to="/" />} />
-    </Routes>
+    <Layout>
+      <ToastContainer theme="dark" autoClose={1000} hideProgressBar newestOnTop />
+      {init ? <Router isAuthenticated={isAuthenticated} /> : <Loader />}
+    </Layout>
   );
 }
 
