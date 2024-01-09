@@ -44,7 +44,6 @@ const HomePage = () => {
         </div>
       </div>
       <PostForm />
-
       <div className="post">
         {posts?.length > 0 ? (
           posts?.map((post) => <PostBox post={post} key={post.uid} />)
