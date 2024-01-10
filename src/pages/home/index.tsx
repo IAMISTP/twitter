@@ -24,7 +24,7 @@ const HomePage = () => {
   useEffect(() => {
     if (user) {
       let postsRef = collection(db, "posts");
-      let postsQuery = query(postsRef, orderBy("createdAt", "desc"));
+      let postsQuery = query(postsRef, orderBy("createdAt", "asc"));
       onSnapshot(postsQuery, (snapshot) => {
         let dataObj = snapshot.docs.map((doc) => ({
           ...doc.data(),
@@ -46,7 +46,7 @@ const HomePage = () => {
       <PostForm />
       <div className="post">
         {posts?.length > 0 ? (
-          posts?.map((post) => <PostBox post={post} key={post.uid} />)
+          posts?.map((post) => <PostBox post={post} key={post.id} />)
         ) : (
           <div className="post__no-posts">
             <div className="post__text">게시글이 없습니다.</div>
