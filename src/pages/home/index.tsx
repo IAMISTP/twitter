@@ -15,6 +15,7 @@ export interface PostsProps {
   likes?: string[];
   likeCount?: number;
   comments?: any;
+  hashTags?: string[];
 }
 
 const HomePage = () => {
@@ -24,7 +25,7 @@ const HomePage = () => {
   useEffect(() => {
     if (user) {
       let postsRef = collection(db, "posts");
-      let postsQuery = query(postsRef, orderBy("createdAt", "asc"));
+      let postsQuery = query(postsRef, orderBy("createdAt", "desc"));
       onSnapshot(postsQuery, (snapshot) => {
         let dataObj = snapshot.docs.map((doc) => ({
           ...doc.data(),
