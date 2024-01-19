@@ -16,6 +16,7 @@ export interface PostsProps {
   likeCount?: number;
   comments?: any;
   hashTags?: string[];
+  imageUrl?: string;
 }
 
 const HomePage = () => {

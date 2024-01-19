@@ -25,7 +25,15 @@ const PostEditForm = () => {
     }
   }, [params.id]);
 
-  const handleFileUpload = () => {};
+  const handleFileUpload = (e: any) => {
+    console.log("click");
+
+    const {
+      target: { file },
+    } = e;
+    console.log(file);
+  };
+
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
@@ -105,16 +113,19 @@ const PostEditForm = () => {
         />
       </div>
       <div className="post-form__submit-area">
-        <label htmlFor="file-input" className="post-form__file">
-          <FiImage className="post-form__file-icon" />
-        </label>
-        <input
-          type="file"
-          name="file-input"
-          accept="image/*"
-          onChange={handleFileUpload}
-          className="hidden"
-        />
+        <div className="post-form__image-area">
+          <label htmlFor="file-input" className="post-form__file">
+            <FiImage className="post-form__file-icon" />
+          </label>
+          <input
+            type="file"
+            name="file-input"
+            id="file-input"
+            accept="image/*"
+            onChange={handleFileUpload}
+            className="hidden"
+          />
+        </div>
         <input type="submit" value="Update" className="post-form__submit-btn" />
       </div>
     </form>
